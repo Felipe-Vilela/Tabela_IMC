@@ -1,0 +1,110 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #cfd9df;
+}
+
+h1{
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+h2{
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #00a86b;
+  
+}
+
+form {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#nome ,#peso, #altura{
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+
+}
+
+button {
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.conteudo{
+  display: flex;
+  flex-direction: column;
+}
+
+.sect{
+  display: flex;
+  flex-direction: row;
+}
+
+.botaos{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.botaos_imc, .botaos_tabela, .botaos_tabela_excluir {    
+  padding: 8px;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+}
+
+.botaos_tabela {
+  background-color: #0c28dd;
+  margin-right: 5px;
+}
+
+.botaos_imc, .botaos_tabela_excluir {
+  background-color: #ff8c00; 
+}
+
+#post {
+  width: 200px;
+  height: 30px;
+  background-color: #00a86b;
+  color: white;
+  border: none;
+  margin-top: 15px;
+}
+
