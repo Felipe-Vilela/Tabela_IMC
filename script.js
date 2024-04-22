@@ -77,7 +77,7 @@ function atualizarTabela(){
 				tdPeso.innerText = pessoa.peso;
 				tdImc.innerText = pessoa.imc;
 				tdStatus.innerText = pessoa.status;
-	
+
 				document.querySelector("tr").append(tdNome);
 				document.querySelector("tbody:last-child").append(trPessoa);
 				document.querySelector("tbody:last-child").append(tdNome);
@@ -91,6 +91,21 @@ function atualizarTabela(){
 			console.error("Error: " + error);
 		});
 }	
+
+// function zerarTabela(){
+// 	const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
+// 	fetch(url).then((resposta) => {
+// 		if (!resposta) {
+// 			throw new Error("Falha ao carregar os dados.");
+// 		}
+// 		return resposta.json()
+// 	}).then((dados => {
+// 		let zerarTabela = document.querySelector("#pessoas-table tbody");
+// 		zerarTabela.innerHTML = "";		
+// 	})).catch(error => {
+// 		console.error("Error: " + error);
+// 	});
+// }
 
 
 //Cadastrar - Adicionar nova pessoa no webservice
@@ -126,7 +141,7 @@ function adicionarPessoa(){
 	}else{
 		e.preventDefault();
 		alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
-		}
+	}
 	})
 }
 
