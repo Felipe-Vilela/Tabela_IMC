@@ -86,25 +86,21 @@ function atualizarTabela(){
 				document.querySelector("tbody:last-child").append(tdImc);
 				document.querySelector("tbody:last-child").append(tdStatus);
 				document.querySelector("tbody:last-child").append(tdOpcao);
-			}        
+			}    
+  
 		}).catch(error => {
 			console.error("Error: " + error);
 		});
 }	
 
 // function zerarTabela(){
-// 	const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
-// 	fetch(url).then((resposta) => {
-// 		if (!resposta) {
-// 			throw new Error("Falha ao carregar os dados.");
-// 		}
-// 		return resposta.json()
-// 	}).then((dados => {
-// 		let zerarTabela = document.querySelector("#pessoas-table tbody");
-// 		zerarTabela.innerHTML = "";		
-// 	})).catch(error => {
-// 		console.error("Error: " + error);
-// 	});
+// 	let tabela = document.querySelector("#pessoas-table");
+// 	let tbody = document.querySelector("#corpo-tabela");
+// 	tbody.innerHTML="";
+
+// 	tbody = document.createElement("tbody");
+// 	tbody.id = 'corpo-tabela';
+// 	document.querySelector("table").append(tbody); 
 // }
 
 
@@ -137,7 +133,8 @@ function adicionarPessoa(){
 			}
 		}
 		fetch(url, options);
-		
+		// zerarTabela();
+				
 	}else{
 		e.preventDefault();
 		alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
