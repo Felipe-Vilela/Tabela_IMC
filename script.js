@@ -93,11 +93,45 @@ function atualizarTabela(){
 }	
 
 
-	//Cadastrar - Adicionar os elementos no webservice
+//Cadastrar - Adicionar nova pessoa no webservice
+function adicionarPessoa(){
+	let btnPost = document.querySelector("#post");
+	btnPost.addEventListener("click", (e) => {
+	//Pega os valores do formulário
+	let nome = document.querySelector("#nome").value;
+	let altura = document.querySelector("#altura").value;
+	let peso = document.querySelector("#peso").value;
+	let imc = parseFloat(calculoImc(peso, altura)).toFixed(2);
+	let status = statusImc(imc);
 
+	if (verificaDados(nome, peso, altura)){
+		e.preventDefault();	
+		const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
 
+		let options = {
+			method: "POST",
+			body: JSON.stringify({
+				nome: nome,
+				altura: altura,
+				peso: peso,
+				imc: imc,
+				status: status,
+			}),
+			headers: {
+				"Content-type" : "application/json"
+			}
+		}
+		fetch(url, options);
+		
+	}else{
+		e.preventDefault();
+		alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
+		}
+	})
+}
 
 atualizarTabela();
+adicionarPessoa();
 
 
 
