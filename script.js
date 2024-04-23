@@ -43,6 +43,9 @@ function atualizarTabela(){
 			}
 			return resposta.json();
 		}).then((dados) => {
+			let tbody = document.createElement("tbody");
+			document.querySelector("table").append(tbody); 
+
 			for(let pessoa of dados) {
 				let trPessoa = document.createElement("tr");
 				let tdNome = document.createElement("td");
@@ -50,7 +53,6 @@ function atualizarTabela(){
 				let tdPeso = document.createElement("td");
 				let tdImc = document.createElement("td");
 				let tdStatus = document.createElement("td");
-	
 				let tdOpcao = document.createElement("td");
 	
 				let btnMenosPeso = document.createElement("button");
@@ -69,8 +71,6 @@ function atualizarTabela(){
 				tdOpcao.append(btnMaisPeso);
 				tdOpcao.append(btnMenosPeso);
 				tdOpcao.append(btnExcluir);
-			
-					
 	
 				tdNome.innerText = pessoa.nome;   
 				tdAltura.innerText = pessoa.altura;   
@@ -93,57 +93,58 @@ function atualizarTabela(){
 		});
 }	
 
-// function zerarTabela(){
-// 	let tabela = document.querySelector("#pessoas-table");
-// 	let tbody = document.querySelector("#corpo-tabela");
-// 	tbody.innerHTML="";
+function zerarTabela(){
+	document.querySelector("tbody").remove();
 
-// 	tbody = document.createElement("tbody");
-// 	tbody.id = 'corpo-tabela';
-// 	document.querySelector("table").append(tbody); 
-// }
+
+
+}
 
 
 //Cadastrar - Adicionar nova pessoa no webservice
 function adicionarPessoa(){
 	let btnPost = document.querySelector("#post");
 	btnPost.addEventListener("click", (e) => {
-	//Pega os valores do formulário
-	let nome = document.querySelector("#nome").value;
-	let altura = document.querySelector("#altura").value;
-	let peso = document.querySelector("#peso").value;
-	let imc = parseFloat(calculoImc(peso, altura)).toFixed(2);
-	let status = statusImc(imc);
+		//Pega os valores do formulário
+		let nome = document.querySelector("#nome").value;
+		let altura = document.querySelector("#altura").value;
+		let peso = document.querySelector("#peso").value;
+		let imc = parseFloat(calculoImc(peso, altura)).toFixed(2);
+		let status = statusImc(imc);
 
-	if (verificaDados(nome, peso, altura)){
-		e.preventDefault();	
-		const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
-
-		let options = {
-			method: "POST",
-			body: JSON.stringify({
-				nome: nome,
-				altura: altura,
-				peso: peso,
-				imc: imc,
-				status: status,
-			}),
-			headers: {
-				"Content-type" : "application/json"
+		if (verificaDados(nome, peso, altura)){
+			e.preventDefault();	
+			const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
+			
+			let options = {
+				method: "POST",
+				body: JSON.stringify({
+					nome: nome,
+					altura: altura,
+					peso: peso,
+					imc: imc,
+					status: status,
+				}),
+				headers: {
+					"Content-type" : "application/json"
+				}
 			}
+			fetch(url, options);
+			zerarTabela();
+			atualizarTabela();
+
+			
+		}else{
+			e.preventDefault();
+			alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
 		}
-		fetch(url, options);
-		// zerarTabela();
-				
-	}else{
-		e.preventDefault();
-		alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
-	}
 	})
 }
 
 atualizarTabela();
+
 adicionarPessoa();
+
 
 
 
