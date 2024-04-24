@@ -91,6 +91,7 @@ function atualizarTabela() {
 					
 							addEventoMaisPeso(btnMaisPeso, pessoa.id, pessoa.peso);
 							addEventoMenosPeso(btnMenosPeso, pessoa.id, pessoa.peso);
+							addEventoExcluir(btnExcluir, pessoa.id)
 						}
 					}
 					
@@ -155,7 +156,6 @@ function addEventoMaisPeso(btnMaisPeso, idPessoa, pesoPessoa) {
 	btnMaisPeso.addEventListener("click", () => {
 		const url = "https://ifsp.ddns.net/webservices/imc/pessoa/" + idPessoa;
 		let novoPeso = parseFloat(pesoPessoa + 0.5);
-
 		let options = {
 			method: "PUT",
 			body: JSON.stringify({
@@ -201,6 +201,33 @@ function addEventoMenosPeso(btnMenosPeso, idPessoa, pesoPessoa) {
 
 		fetch(url, options)
 		.then((resposta) => {
+			if (!resposta.ok) {
+				throw new Error("Falha ao carregar os dados.");
+			}
+			return resposta.json();
+		})
+		.then((dados) => {
+			limparTabela();
+			atualizarTabela();
+		})
+		.catch(error => {
+			console.error("Error: " + error);
+		});
+	});	
+}
+
+
+function addEventoExcluir(btnExcluir, idPessoa) {
+	btnExcluir.addEventListener("click", () => {
+		const url = "https://ifsp.ddns.net/webservices/imc/pessoa/" + idPessoa;
+
+		fetch(url, {
+			method: "DELETE",
+			body: JSON.stringify(addEventoExcluir),
+			headers: {
+					"Content-type": "application/json"
+			}
+		}).then((resposta) => {
 			if (!resposta.ok) {
 				throw new Error("Falha ao carregar os dados.");
 			}
