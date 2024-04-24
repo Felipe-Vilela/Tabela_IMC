@@ -10,9 +10,9 @@ function statusImc(resultadoCalculo) {
 
 	if (resultadoCalculo < 18.50) {
 			status = "Magreza";
-	} else if (resultadoCalculo >= 18.50 && resultadoCalculo <= 24.99) {
+	} else if (resultadoCalculo <= 24.99) {
 			status = "Saudável";
-	} else if (resultadoCalculo >= 25.00 && resultadoCalculo <= 29.99) {
+	} else if (resultadoCalculo <= 29.99) {
 			status = "Sobrepeso";
 	} else if (resultadoCalculo >= 30.00 && resultadoCalculo <= 34.99) {
 			status = "Obesidade I";
@@ -88,9 +88,12 @@ function atualizarTabela() {
 							trPessoa.append(tdOpcao);
 
 							tbody.appendChild(trPessoa); // Adiciona a linha à tabela
+					
+							addEventoMaisPeso(btnMaisPeso, pessoa.id);
+						}
 					}
-
-			})
+					
+			)
 			.catch(error => {
 					console.error("Error: " + error);
 			});
@@ -140,16 +143,56 @@ function adicionarPessoa() {
 									atualizarTabela();
 							})
 							.catch(error => console.error("Error:" + error));
-			} else {
-					e.preventDefault();
-					alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
-			}
+					} else {
+							e.preventDefault();
+							alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
+					}
 	});
 }
 
-function adicionarPeso(){
 
-	
+
+function addEventoMaisPeso(btnMaisPeso, idPessoa) {
+	btnMaisPeso.addEventListener("click", (e) => {
+		const url = "https://ifsp.ddns.net/webservices/imc/pessoa" + idPessoa;
+
+		fetch(url)
+		.then((resposta) => {
+				if (!resposta.ok) {
+						throw new Error("Falha ao carregar os dados.");
+				}
+				return resposta.json();
+		})
+		.then((dados) => {
+				for (let pessoa of dados) {
+					if (pessoa.id == idPessoa) {
+						pessoa.nome;
+						let options = {
+							method: "PUT",
+							body: JSON.stringify({
+									nome: pessoa.nome,
+									altura: pessoa.altura,
+									peso: pessoa.peso += 0.5,		
+									imc: pessoa.imc,
+									status: pessoa.status,								
+							}),
+							headers: {
+									"Content-type": "application/json"
+							}
+						}
+						fetch(url, options);
+					}
+				}
+			}
+				
+		)
+		.catch(error => {
+				console.error("Error: " + error);
+		});
+
+
+		
+	});	
 }
 
 atualizarTabela();
