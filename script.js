@@ -89,7 +89,7 @@ function atualizarTabela() {
 
 							tbody.appendChild(trPessoa); // Adiciona a linha à tabela
 					
-							addEventoMaisPeso(btnMaisPeso, pessoa.id);
+							addEventoMaisPeso(btnMaisPeso, pessoa.id, pessoa.peso);
 						}
 					}
 					
@@ -150,48 +150,35 @@ function adicionarPessoa() {
 	});
 }
 
+function addEventoMaisPeso(btnMaisPeso, idPessoa, pesoPessoa) {
+	btnMaisPeso.addEventListener("click", () => {
+		const url = "https://ifsp.ddns.net/webservices/imc/pessoa/" + idPessoa;
+		let novoPeso = parseFloat(pesoPessoa + 0.5);
 
+		let options = {
+			method: "PUT",
+			body: JSON.stringify({
+				peso: novoPeso,								
+			}),
+			headers: {
+				"Content-type": "application/json"
+			}
+		}
 
-function addEventoMaisPeso(btnMaisPeso, idPessoa) {
-	btnMaisPeso.addEventListener("click", (e) => {
-		const url = "https://ifsp.ddns.net/webservices/imc/pessoa" + idPessoa;
-
-		fetch(url)
+		fetch(url, options)
 		.then((resposta) => {
-				if (!resposta.ok) {
-						throw new Error("Falha ao carregar os dados.");
-				}
-				return resposta.json();
+			if (!resposta.ok) {
+				throw new Error("Falha ao carregar os dados.");
+			}
+			return resposta.json();
 		})
 		.then((dados) => {
-				for (let pessoa of dados) {
-					if (pessoa.id == idPessoa) {
-						pessoa.nome;
-						let options = {
-							method: "PUT",
-							body: JSON.stringify({
-									nome: pessoa.nome,
-									altura: pessoa.altura,
-									peso: pessoa.peso += 0.5,		
-									imc: pessoa.imc,
-									status: pessoa.status,								
-							}),
-							headers: {
-									"Content-type": "application/json"
-							}
-						}
-						fetch(url, options);
-					}
-				}
-			}
-				
-		)
+			limparTabela();
+			atualizarTabela();
+		})
 		.catch(error => {
-				console.error("Error: " + error);
+			console.error("Error: " + error);
 		});
-
-
-		
 	});	
 }
 
