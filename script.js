@@ -90,6 +90,7 @@ function atualizarTabela() {
 							tbody.appendChild(trPessoa); // Adiciona a linha à tabela
 					
 							addEventoMaisPeso(btnMaisPeso, pessoa.id, pessoa.peso);
+							addEventoMenosPeso(btnMenosPeso, pessoa.id, pessoa.peso);
 						}
 					}
 					
@@ -181,6 +182,42 @@ function addEventoMaisPeso(btnMaisPeso, idPessoa, pesoPessoa) {
 		});
 	});	
 }
+
+
+function addEventoMenosPeso(btnMenosPeso, idPessoa, pesoPessoa) {
+	btnMenosPeso.addEventListener("click", () => {
+		const url = "https://ifsp.ddns.net/webservices/imc/pessoa/" + idPessoa;
+		let novoPeso = parseFloat(pesoPessoa - 0.5);
+
+		let options = {
+			method: "PUT",
+			body: JSON.stringify({
+				peso: novoPeso,								
+			}),
+			headers: {
+				"Content-type": "application/json"
+			}
+		}
+
+		fetch(url, options)
+		.then((resposta) => {
+			if (!resposta.ok) {
+				throw new Error("Falha ao carregar os dados.");
+			}
+			return resposta.json();
+		})
+		.then((dados) => {
+			limparTabela();
+			atualizarTabela();
+		})
+		.catch(error => {
+			console.error("Error: " + error);
+		});
+	});	
+}
+
+
+
 
 atualizarTabela();
 adicionarPessoa();
