@@ -14,7 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #cfd9df;
+  background-color: #f1f1f1;
 }
 
 h1{
@@ -47,17 +47,22 @@ th {
   
 }
 
+
 form {
   margin-top: 15px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
 }
-
-#nome ,#peso, #altura{
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-
+form input{
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  border: solid 1px #000;
 }
+
 button{
   padding: 5px;
   font-size: 16px;
@@ -87,6 +92,7 @@ button{
   cursor: pointer;
   color: #fff;
   border: none;
+  border-radius: 5px;
 }
 
 .botaos_tabela {
@@ -94,14 +100,23 @@ button{
   margin-right: 5px;
 }
 
-.botaos_imc, .botaos_tabela_excluir {
+.botaos_tabela_excluir {
   background-color: #ff8c00; 
+}
+
+.botaos_imc{
+  background-color: #FFE08A;
+}
+
+
+
+#post:hover{
+  background-color: #05bd79;
 }
 
 #post {
   cursor: pointer;
-  width: 200px;
-  height: 30px;
+
   background-color: #00a86b;
   color: white;
   border: none;
