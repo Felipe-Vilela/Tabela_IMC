@@ -58,8 +58,7 @@ form {
   background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
 }
-
-button {
+button{
   padding: 5px;
   font-size: 16px;
   cursor: pointer;
@@ -100,6 +99,7 @@ button {
 }
 
 #post {
+  cursor: pointer;
   width: 200px;
   height: 30px;
   background-color: #00a86b;
