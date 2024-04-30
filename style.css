@@ -14,7 +14,25 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  gap: 100px;
+  width: 100%;
+}
+
+.cadastro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.container-form{
+  border-right: 1px solid #868fcf;  
+  padding: 60px;
 }
 
 h1{
@@ -30,21 +48,21 @@ h2{
 
 table {
   border-collapse: collapse;
-  width: 50%;
+  width: 100%;
   margin-top: 30px;
   margin-bottom: 30px;
-  
+  border-radius: 8px;
 }
 
 th, td {
-  border: 1px solid #000;
+  border: 1px solid #ffffff;
   padding: 8px;
   text-align: left;
 }
 
 th {
-  background-color: #00a86b;
-  
+  background-color: #a5abdc;
+  color: #fff;
 }
 
 
@@ -96,30 +114,33 @@ button{
 }
 
 .botaos_tabela {
-  background-color: #0c28dd;
+  background-color: #1d38e8;
   margin-right: 5px;
+  transition: .8s;
 }
 
-.botaos_tabela_excluir {
-  background-color: #ff8c00; 
+.botaos_tabela_excluir, .botaos_imc {
+  background-color: #ff2828; 
+  transition: .8s;
 }
 
-.botaos_imc{
-  background-color: #FFE08A;
-}
-
-
-
-#post:hover{
-  background-color: #05bd79;
+.botaos_imc:hover, .botaos_tabela:hover, .botaos_tabela_excluir:hover {
+  opacity: .8;
 }
 
 #post {
   cursor: pointer;
-
-  background-color: #00a86b;
+  background-color: #868fcf;
   color: white;
   border: none;
   margin-top: 15px;
+  transition: .8s;
+  font-weight: 700;
+  font-size: 15px;
 }
+
+#post:hover{
+  opacity: .8;
+}
+
 
