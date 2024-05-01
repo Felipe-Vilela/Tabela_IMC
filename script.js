@@ -65,6 +65,7 @@ function atualizarTabela() {
 			addEventoMaisPeso(btnMaisPeso, pessoa.id, pessoa.peso);
 			addEventoMenosPeso(btnMenosPeso, pessoa.id, pessoa.peso);
 			addEventoExcluirLinha(btnExcluir, pessoa.id)
+
 		}
 	})
 	.catch(error => {
@@ -296,7 +297,11 @@ function main() {
 	btnPost.addEventListener("click", (e) => {
 		e.preventDefault();
 		adicionarPessoa()
-	})
+
+		// Limpa formulário
+		formulario = document.querySelector("#cadastro-form")
+		formulario.reset();
+})
 
 	let btnMaiorImc = document.querySelector("#btnRemoverMaiorImc");
 	let btnMenorImc = document.querySelector("#btnRemoverMenorImc");
