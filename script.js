@@ -87,43 +87,34 @@ function adicionarPessoa() {
 
 
 	if (verificaDados(nome, peso, altura)) {
-
-		let btnPost = document.querySelector("#post");
-		btnPost.addEventListener("click", (e) => {
-			// Limpa formulário
-			formulario = document.querySelector("#cadastro-form")
-			formulario.reset();
-			e.preventDefault();
-
-			const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
-			let options = {
-					method: "POST",
-					body: JSON.stringify({
-							nome: nome,
-							altura: altura,
-							peso: peso,
-					}),
-					headers: {
-							"Content-type": "application/json"
-					}
-			}
-			fetch(url, options).then((resposta) => {
-					if (!resposta.ok) {
-						throw new Error("Falha ao adicionar pessoa.");
-					}
-					return resposta.json();
-					})
-					.then(() => {
-						atualizarTabela();
-						
-					})
-					.catch(error => console.error("Error:" + error));
-			})
-	} else {
-			// e.preventDefault();
+		const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
+		let options = {
+				method: "POST",
+				body: JSON.stringify({
+						nome: nome,
+						altura: altura,
+						peso: peso,
+				}),
+				headers: {
+						"Content-type": "application/json"
+				}
+		}
+		fetch(url, options).then((resposta) => {
+				if (!resposta.ok) {
+					throw new Error("Falha ao adicionar pessoa.");
+				}
+				return resposta.json();
+				})
+				.then(() => {
+					atualizarTabela();
+					
+				})
+				.catch(error => console.error("Error:" + error));
+		return true
+	} 
+	else {
 			alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
 	}
-
 	
 };
 
@@ -299,15 +290,15 @@ function addEventoExcluir(idPessoa) {
 function main() {
 	atualizarTabela();
 
-	// let btnPost = document.querySelector("#post");
-	// btnPost.addEventListener("click", (e) => {
-	adicionarPessoa();
-		// Limpa formulário
-// 		formulario = document.querySelector("#cadastro-form")
-// 		formulario.reset();
-// 		e.preventDefault();
-
-// })
+	let btnPost = document.querySelector("#post");
+	btnPost.addEventListener("click", (e) => {
+		if(adicionarPessoa()){
+			// Limpa formulário
+			formulario = document.querySelector("#cadastro-form")
+			formulario.reset();
+			e.preventDefault();
+		}
+})
 
 	let btnMaiorImc = document.querySelector("#btnRemoverMaiorImc");
 	let btnMenorImc = document.querySelector("#btnRemoverMenorImc");
