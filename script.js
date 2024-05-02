@@ -113,7 +113,7 @@ function adicionarPessoa() {
 		return true
 	} 
 	else {
-			alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
+		alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
 	}
 	
 };
