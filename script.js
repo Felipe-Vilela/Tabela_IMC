@@ -18,7 +18,7 @@ function atualizarTabela() {
 	})
 	.then((dados) => {
 		const tbody = document.querySelector("#corpo-tabela");
-		limparTabela() // Limpa o conteúdo do tbody antes de adicionar os novos dados
+		limparTabela() 
 		
 		for (let pessoa of dados) {
 			let trPessoa = document.createElement("tr");
@@ -87,35 +87,45 @@ function adicionarPessoa() {
 
 
 	if (verificaDados(nome, peso, altura)) {
-		const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
-		
-		let options = {
-				method: "POST",
-				body: JSON.stringify({
-						nome: nome,
-						altura: altura,
-						peso: peso,
-				}),
-				headers: {
-						"Content-type": "application/json"
-				}
-		}
-		fetch(url, options).then((resposta) => {
-				if (!resposta.ok) {
+
+		let btnPost = document.querySelector("#post");
+		btnPost.addEventListener("click", (e) => {
+			// Limpa formulário
+			formulario = document.querySelector("#cadastro-form")
+			formulario.reset();
+			e.preventDefault();
+
+			const url = "https://ifsp.ddns.net/webservices/imc/pessoa";
+			let options = {
+					method: "POST",
+					body: JSON.stringify({
+							nome: nome,
+							altura: altura,
+							peso: peso,
+					}),
+					headers: {
+							"Content-type": "application/json"
+					}
+			}
+			fetch(url, options).then((resposta) => {
+					if (!resposta.ok) {
 						throw new Error("Falha ao adicionar pessoa.");
-				}
-				return resposta.json();
-				})
-				.then(() => {
-						limparTabela();
+					}
+					return resposta.json();
+					})
+					.then(() => {
 						atualizarTabela();
-				})
-				.catch(error => console.error("Error:" + error));
-		} else {
-				e.preventDefault();
-				alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
-		}
-	};
+						
+					})
+					.catch(error => console.error("Error:" + error));
+			})
+	} else {
+			// e.preventDefault();
+			alert("Há campos vazios ou dados inválidos. Peso e Altura precisam ser maiores que 0.");
+	}
+
+	
+};
 
 function addEventoMaisPeso(btnMaisPeso, idPessoa, pesoPessoa) {
 	btnMaisPeso.addEventListener("click", () => {
@@ -139,7 +149,6 @@ function addEventoMaisPeso(btnMaisPeso, idPessoa, pesoPessoa) {
 			return resposta.json();
 		})
 		.then((dados) => {
-			limparTabela();
 			atualizarTabela();
 		})
 		.catch(error => {
@@ -173,7 +182,6 @@ function addEventoMenosPeso(btnMenosPeso, idPessoa, pesoPessoa) {
 				return resposta.json();
 			})
 			.then((dados) => {
-				limparTabela();
 				atualizarTabela();
 			})
 			.catch(error => {
@@ -200,7 +208,6 @@ function addEventoExcluirLinha(btnExcluir, idPessoa) {
 			return resposta.json();
 		})
 		.then((dados) => {
-			limparTabela();
 			atualizarTabela();
 		})
 		.catch(error => {
@@ -282,7 +289,6 @@ function addEventoExcluir(idPessoa) {
 			return resposta.json();
 		})
 		.then((dados) => {
-			limparTabela();
 			atualizarTabela();
 		})
 		.catch(error => {
@@ -293,15 +299,15 @@ function addEventoExcluir(idPessoa) {
 function main() {
 	atualizarTabela();
 
-	let btnPost = document.querySelector("#post");
-	btnPost.addEventListener("click", (e) => {
-		e.preventDefault();
-		adicionarPessoa()
-
+	// let btnPost = document.querySelector("#post");
+	// btnPost.addEventListener("click", (e) => {
+	adicionarPessoa();
 		// Limpa formulário
-		formulario = document.querySelector("#cadastro-form")
-		formulario.reset();
-})
+// 		formulario = document.querySelector("#cadastro-form")
+// 		formulario.reset();
+// 		e.preventDefault();
+
+// })
 
 	let btnMaiorImc = document.querySelector("#btnRemoverMaiorImc");
 	let btnMenorImc = document.querySelector("#btnRemoverMenorImc");

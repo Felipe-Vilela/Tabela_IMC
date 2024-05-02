@@ -31,19 +31,21 @@ body {
 }
 
 .container-form{
-  border-right: 1px solid #868fcf;  
+  border-right: 1px solid #E4EBF3;  
   padding: 60px;
 }
 
 h1{
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid #E4EBF3;
 }
 
 h2{
   font-family: "Poppins", sans-serif;
   font-weight: 600;
+  text-align: center;
 }
 
 table {
@@ -61,8 +63,11 @@ th, td {
 }
 
 th {
-  background-color: #a5abdc;
+  background-color: #485FC7;
   color: #fff;
+}
+tbody tr{
+  border-bottom: 2px solid #E4EBF3;  
 }
 
 
@@ -104,6 +109,9 @@ button{
   margin-top: 20px;
   gap: 10px;
 }
+.botaos_imc{
+  width: 200px;
+}
 
 .botaos_imc, .botaos_tabela, .botaos_tabela_excluir {    
   padding: 8px;
@@ -114,14 +122,14 @@ button{
 }
 
 .botaos_tabela {
-  background-color: #1d38e8;
+  background-color: #84A45A;
   margin-right: 5px;
-  transition: .8s;
+  transition: .6s;
 }
 
 .botaos_tabela_excluir, .botaos_imc {
-  background-color: #ff2828; 
-  transition: .8s;
+  background-color: #D53D3C; 
+  transition: .6s;
 }
 
 .botaos_imc:hover, .botaos_tabela:hover, .botaos_tabela_excluir:hover {
@@ -130,11 +138,11 @@ button{
 
 #post {
   cursor: pointer;
-  background-color: #868fcf;
+  background-color: #485FC7;
   color: white;
   border: none;
   margin-top: 15px;
-  transition: .8s;
+  transition: .6s;
   font-weight: 700;
   font-size: 15px;
 }
