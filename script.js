@@ -220,15 +220,19 @@ function addRemoverMaiorImc(){
 			return resposta.json();
 	})
 	.then((dados) => {
-		maiorImc = dados[0].imc;
-		idMaiorImc = dados[0].id;
-		for (let pessoa of dados) {
-			if (maiorImc < pessoa.imc) {
-				maiorImc = pessoa.imc
-				idMaiorImc = pessoa.id
+		if(dados.length > 0){
+			maiorImc = dados[0].imc;
+			idMaiorImc = dados[0].id;
+			for (let pessoa of dados) {
+				if (maiorImc < pessoa.imc) {
+					maiorImc = pessoa.imc
+					idMaiorImc = pessoa.id
+				}
 			}
+			addEventoExcluir(idMaiorImc)
+		}else{
+			alert("Não existem dados para verificação!");
 		}
-		addEventoExcluir(idMaiorImc)
 	}		
 	)
 	.catch(error => {
@@ -250,15 +254,20 @@ function addRemoverMenorImc(){
 			return resposta.json();
 	})
 	.then((dados) => {
-		menorImc = dados[0].imc;
-		idMenorImc = dados[0].id;
-		for (let pessoa of dados) {
-			if (menorImc > pessoa.imc) {
-				menorImc = pessoa.imc
-				idMenorImc = pessoa.id
+		if(dados.length > 0){
+			menorImc = dados[0].imc;
+			idMenorImc = dados[0].id;
+			for (let pessoa of dados) {
+				if (menorImc > pessoa.imc) {
+					menorImc = pessoa.imc
+					idMenorImc = pessoa.id
+				}
 			}
+			addEventoExcluir(idMenorImc)
+		}else{
+			alert("Não existem dados para verificação!");
 		}
-		addEventoExcluir(idMenorImc)
+
 	}		
 	)
 	.catch(error => {
